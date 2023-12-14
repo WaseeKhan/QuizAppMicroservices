@@ -31,4 +31,9 @@ public class QuestionController {
     public List<Question> getByQuizId(@PathVariable Long quizId){
         return questionService.getByQuizId(quizId);
     }
+
+    @DeleteMapping("/{questionId}")
+    public Question delete(@PathVariable Long questionId){
+        return questionService.deleteOne(questionId);
+    }
 }

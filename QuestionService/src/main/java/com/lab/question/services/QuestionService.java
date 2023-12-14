@@ -13,4 +13,6 @@ public interface QuestionService {
     Question get(Long questionId);
 
     List<Question> getByQuizId(Long quizId);
+
+    Question deleteOne(Long questionId);
 }

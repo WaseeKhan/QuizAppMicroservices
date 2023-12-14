@@ -29,4 +29,19 @@ public class QuizController {
     public Quiz getOne(@PathVariable Long id){
         return quizService.get(id);
     }
+
+    @DeleteMapping("/{quizId}")
+    public String deleteQuiz(@PathVariable Long quizId){
+        quizService.deleteQuiz(quizId);
+        return "Quiz Deleted Successfully!!";
+    }
+
+
+    @PutMapping("/{quizId}")
+    public Quiz updateQuiz(@RequestBody Quiz quiz, @PathVariable Long quizId){
+        quiz.setQuizId(quizId);
+        Quiz updatedQuiz = quizService.updateQuiz(quiz);
+        return updatedQuiz;
+    }
+
 }

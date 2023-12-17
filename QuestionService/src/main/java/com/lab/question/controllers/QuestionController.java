@@ -33,7 +33,14 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{questionId}")
-    public Question delete(@PathVariable Long questionId){
-        return questionService.deleteOne(questionId);
+    public String deleteQuestion(@PathVariable Long questionId){
+        questionService.deleteQuestion(questionId);
+        return "Question has been deleted Successfully";
+    }
+
+    @PutMapping("/{questionId}")
+    public Question updateQuestion(@RequestBody Question question, @PathVariable Long questionId ){
+        question.setQuestionId(questionId);
+        return questionService.updateQuestion(question, questionId);
     }
 }

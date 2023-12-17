@@ -1,7 +1,6 @@
 package com.lab.question.services;
 
 import com.lab.question.entities.Question;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,5 +13,9 @@ public interface QuestionService {
 
     List<Question> getByQuizId(Long quizId);
 
-    Question deleteOne(Long questionId);
+     void deleteQuestion(Long questionId);
+
+     Question updateQuestion(Question question, Long questionId);
+
+
 }

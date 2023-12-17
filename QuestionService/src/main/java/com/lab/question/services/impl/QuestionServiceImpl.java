@@ -5,8 +5,7 @@ import com.lab.question.repositories.QuestionRepository;
 import com.lab.question.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +36,15 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question deleteOne(Long questionId) {
-        Optional<Question> findOne = questionRepository.findById(questionId);
+    public void deleteQuestion(Long questionId) {
+        questionRepository.findById(questionId).orElseThrow(()->new RuntimeException("Question Id not found for Delete"));
         questionRepository.deleteById(questionId);
-         return findOne.orElseThrow(()->new RuntimeException("QuestionId not found"));
     }
 
-
+    @Override
+    public Question updateQuestion(Question question, Long questionId) {
+        Question questionIdForUpdate = questionRepository.findById(questionId).orElseThrow(() -> new RuntimeException("Question no found for update"));
+        questionIdForUpdate.setQuestion(question.getQuestion());
+        return questionIdForUpdate;
+    }
 }
